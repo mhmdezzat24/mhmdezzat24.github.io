@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed Ezzat | Data Analyst Portfolio | Power BI, Python, Excel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#08080f;
+  --bg2:#0f0f1a;
+  --bg3:#141424;
+  --gold:#c9a96e;
+  --gold2:#e8c99a;
+  --white:#f0ede8;
+  --muted:#7a7a8c;
+  --border:rgba(201,169,110,0.15);
+  --border2:rgba(201,169,110,0.3);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--white);font-size:16px;line-height:1.7;overflow-x:hidden}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;background:rgba(8,8,15,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--gold);text-decoration:none;letter-spacing:0.05em}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.3s}
+.nav-links a:hover{color:var(--gold)}
+
+/* ===================== HERO ===================== */
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+
+/* Left side */
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:120px 6% 80px 8%;position:relative;z-index:2}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:32px;opacity:0;animation:fadeUp 0.7s ease forwards 0.2s}
+.hero-eyebrow-line{width:40px;height:1px;background:var(--gold)}
+.hero-eyebrow span{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,6vw,88px);font-weight:300;line-height:0.95;color:var(--white);margin-bottom:8px;opacity:0;animation:fadeUp 0.8s ease forwards 0.35s}
+.hero-name strong{display:block;font-weight:700;color:var(--gold);font-style:italic}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2vw,26px);font-weight:300;color:var(--muted);font-style:italic;margin-bottom:40px;opacity:0;animation:fadeUp 0.7s ease forwards 0.5s}
+.hero-bio{font-size:14px;font-weight:300;color:var(--muted);max-width:440px;line-height:1.95;margin-bottom:48px;opacity:0;animation:fadeUp 0.7s ease forwards 0.65s;border-left:1px solid var(--border2);padding-left:20px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.7s ease forwards 0.8s}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--bg);padding:14px 32px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border-radius:1px;transition:all 0.3s;border:none;cursor:pointer}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;color:var(--gold);padding:13px 32px;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border-radius:1px;border:1px solid var(--border2);transition:all 0.3s;background:none;cursor:pointer}
+.btn-outline:hover{background:rgba(201,169,110,0.1);border-color:var(--gold)}
+
+/* Right side — PHOTO */
+.hero-right{position:relative;overflow:hidden}
+.hero-img-wrap{position:absolute;inset:0;display:flex;align-items:stretch}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.7) contrast(1.1)}
+.hero-img-overlay{position:absolute;inset:0;background:linear-gradient(to right, var(--bg) 0%, transparent 40%)}
+.hero-img-overlay2{position:absolute;inset:0;background:linear-gradient(to top, var(--bg) 0%, transparent 50%)}
+.hero-photo-label{position:absolute;bottom:48px;right:48px;text-align:right;z-index:3}
+.hero-photo-label .name{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold);letter-spacing:0.1em}
+.hero-photo-label .loc{font-size:11px;color:var(--muted);letter-spacing:0.08em;margin-top:4px}
+.hero-scroll{position:absolute;bottom:40px;left:8%;display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp 0.7s ease forwards 1.2s;z-index:3}
+.hero-scroll span{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)}
+.hero-scroll-line{width:60px;height:1px;background:var(--gold);animation:expandLine 1.5s ease infinite}
+@keyframes expandLine{0%,100%{transform:scaleX(0.3);transform-origin:left}50%{transform:scaleX(1);transform-origin:left}}
+
+/* Gold corner decoration */
+.hero-deco{position:absolute;top:120px;right:45%;width:60px;height:60px;border-top:1px solid var(--gold);border-right:1px solid var(--gold);z-index:3;opacity:0;animation:fadeIn 1s ease forwards 1s}
+.hero-deco2{position:absolute;bottom:80px;right:45%;width:40px;height:40px;border-bottom:1px solid var(--gold);border-left:1px solid var(--gold);z-index:3;opacity:0;animation:fadeIn 1s ease forwards 1.1s}
+
+/* Stats bar */
+.hero-stats{position:absolute;bottom:0;left:0;right:50%;background:var(--bg2);border-top:1px solid var(--border);display:flex;z-index:3}
+.hero-stat{flex:1;padding:20px;text-align:center;border-right:1px solid var(--border)}
+.hero-stat:last-child{border-right:none}
+.hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1}
+.hero-stat-label{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+/* ===================== SECTIONS ===================== */
+section{padding:100px 8%}
+.sec-tag{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.sec-tag-line{width:32px;height:1px;background:var(--gold)}
+.sec-tag span{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold)}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,64px);font-weight:300;color:var(--white);line-height:1;margin-bottom:60px}
+.sec-title em{font-style:italic;color:var(--gold)}
+
+/* ===================== ABOUT ===================== */
+#about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-text p{font-size:15px;color:var(--muted);margin-bottom:18px;line-height:1.9;font-weight:300}
+.about-text p strong{color:var(--white);font-weight:500}
+.about-info{display:flex;flex-direction:column;gap:1px;margin-top:32px}
+.ai-row{display:flex;gap:0;background:var(--bg3)}
+.ai-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);padding:12px 16px;min-width:100px;border-right:1px solid var(--border)}
+.ai-val{font-size:13px;color:var(--muted);padding:12px 16px;font-weight:300}
+.ai-val a{color:var(--gold);text-decoration:none}
+.about-right{display:flex;flex-direction:column;gap:1px}
+.about-stat{background:var(--bg3);padding:28px;border-left:2px solid var(--gold)}
+.about-stat-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;color:var(--gold);line-height:1}
+.about-stat-label{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.cv-download{margin-top:1px;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--gold);color:var(--bg);padding:16px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;border:none;transition:all 0.3s;width:100%}
+.cv-download:hover{background:var(--gold2)}
+
+/* ===================== EXPERIENCE ===================== */
+#experience{background:var(--bg)}
+.exp-list{display:flex;flex-direction:column;gap:1px}
+.exp-item{background:var(--bg2);padding:36px 40px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:start;border-left:2px solid transparent;transition:border-color 0.3s}
+.exp-item:hover{border-left-color:var(--gold)}
+.exp-company{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white);margin-bottom:4px}
+.exp-role{font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.exp-desc{font-size:13px;color:var(--muted);line-height:1.8;font-weight:300}
+.exp-date{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.exp-edu{background:var(--bg3);border-left:2px solid var(--gold)}
+.edu-badge{display:inline-block;margin-top:12px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);border:1px solid var(--border2);padding:4px 12px}
+
+/* ===================== SKILLS ===================== */
+#skills{background:var(--bg2)}
+.skills-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:60px}
+.skills-block-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-bottom:60px}
+.skill-card{background:var(--bg3);padding:28px 24px;transition:background 0.3s}
+.skill-card:hover{background:rgba(201,169,110,0.05)}
+.skill-icon-wrap{width:36px;height:36px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:16px}
+.skill-name{font-size:14px;font-weight:500;color:var(--white);margin-bottom:8px}
+.skill-desc{font-size:12px;color:var(--muted);line-height:1.7;font-weight:300}
+.skill-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:12px}
+.tag{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;background:rgba(201,169,110,0.08);color:var(--gold);padding:3px 8px;border:1px solid var(--border)}
+.soft-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
+.soft-item{background:var(--bg3);padding:20px 18px;display:flex;align-items:center;gap:10px;font-size:12px;font-weight:400;color:var(--muted);letter-spacing:0.04em;transition:all 0.3s}
+.soft-item:hover{color:var(--white);background:rgba(201,169,110,0.05)}
+.soft-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:40px}
+.lang-item{background:var(--bg3);padding:24px}
+.lang-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--white);margin-bottom:2px}
+.lang-level{font-size:11px;color:var(--muted);letter-spacing:0.06em;margin-bottom:12px}
+.lang-bar{height:2px;background:rgba(255,255,255,0.05)}
+.lang-fill{height:100%;background:var(--gold);transition:width 1s ease}
+
+/* ===================== PROJECTS ===================== */
+#projects{background:var(--bg)}
+.proj-grid{display:flex;flex-direction:column;gap:1px}
+.proj-card{background:var(--bg2);display:grid;grid-template-columns:1fr 380px;min-height:280px;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden}
+.proj-card:hover{background:var(--bg3)}
+.proj-card-left{padding:40px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--border)}
+.proj-meta{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.proj-num{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--muted);font-style:italic}
+.proj-badge{font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border:1px solid}
+.b-xl{color:#4ade80;border-color:rgba(74,222,128,0.3);background:rgba(74,222,128,0.05)}
+.b-pbi{color:#fbbf24;border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.05)}
+.b-tab{color:#60a5fa;border-color:rgba(96,165,250,0.3);background:rgba(96,165,250,0.05)}
+.b-py{color:#a78bfa;border-color:rgba(167,139,250,0.3);background:rgba(167,139,250,0.05)}
+.proj-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--white);margin-bottom:12px;line-height:1.2}
+.proj-desc{font-size:13px;color:var(--muted);line-height:1.8;font-weight:300}
+.proj-details{max-height:0;overflow:hidden;transition:max-height 0.5s ease}
+.proj-card.open .proj-details{max-height:400px}
+.proj-details-inner{padding-top:20px;display:flex;flex-direction:column;gap:6px}
+.proj-detail{font-size:12px;color:var(--muted);display:flex;gap:8px;font-weight:300}
+.proj-arrow{color:var(--gold);flex-shrink:0}
+.proj-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:16px}
+.proj-expand{position:absolute;bottom:20px;right:20px;width:32px;height:32px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:18px;transition:all 0.3s}
+.proj-card.open .proj-expand{transform:rotate(45deg)}
+.proj-card-right{position:relative;overflow:hidden}
+.proj-mockup{width:100%;height:100%;position:relative;background:var(--bg3);display:flex;align-items:center;justify-content:center}
+
+/* Dashboard mockups using CSS */
+.mock-excel{padding:20px;display:flex;flex-direction:column;gap:8px;width:100%}
+.mock-bar-row{display:flex;align-items:flex-end;gap:6px;height:120px}
+.mock-bar{border-radius:2px 2px 0 0;transition:height 0.5s ease}
+.mock-line{height:2px;background:var(--border);margin:4px 0}
+.mock-title{font-size:10px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px}
+.mock-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.mock-kpi{background:var(--bg2);padding:10px;border-left:2px solid var(--gold)}
+.mock-kpi-num{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold)}
+.mock-kpi-label{font-size:8px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase}
+.mock-pie{width:80px;height:80px;border-radius:50%;background:conic-gradient(#c9a96e 0% 38%,#4ade80 38% 67%,#60a5fa 67% 83%,#a78bfa 83% 100%)}
+.mock-map{width:100%;height:100%;background:rgba(201,169,110,0.03);position:relative;border:1px solid var(--border)}
+.mock-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--gold);transform:translate(-50%,-50%)}
+.mock-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;background:rgba(201,169,110,0.2);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:0}}
+.mock-funnel{display:flex;flex-direction:column;align-items:center;gap:3px;padding:16px}
+.mock-funnel-step{height:24px;background:var(--gold);border-radius:2px;opacity:0.9}
+
+/* ===================== HOBBIES ===================== */
+#hobbies{background:var(--bg2)}
+.hobbies-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px}
+.hobby-card{background:var(--bg3);padding:40px 32px;position:relative;overflow:hidden;transition:background 0.3s}
+.hobby-card:hover{background:rgba(201,169,110,0.04)}
+.hobby-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform 0.4s ease;transform-origin:left}
+.hobby-card:hover::before{transform:scaleX(1)}
+.hobby-icon{font-size:36px;margin-bottom:20px;display:block}
+.hobby-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--white);margin-bottom:16px}
+.hobby-text{font-size:13px;color:var(--muted);line-height:1.85;font-weight:300}
+.hobby-highlight{display:inline-block;color:var(--gold);font-weight:500;font-size:12px;margin-top:12px;letter-spacing:0.04em}
+
+/* ===================== CONTACT ===================== */
+#contact{background:var(--bg);min-height:80vh;display:flex;flex-direction:column;justify-content:center}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.contact-lead{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,64px);font-weight:300;color:var(--white);line-height:1;margin-bottom:20px}
+.contact-lead em{font-style:italic;color:var(--gold)}
+.contact-subtext{font-size:14px;color:var(--muted);font-weight:300;line-height:1.9;margin-bottom:0}
+.contact-links{display:flex;flex-direction:column;gap:1px}
+.contact-link{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:var(--bg2);text-decoration:none;border-left:2px solid transparent;transition:all 0.3s}
+.contact-link:hover{border-left-color:var(--gold);background:var(--bg3)}
+.cl-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.cl-value{font-size:14px;font-weight:400;color:var(--white)}
+.cl-arrow{color:var(--gold);font-size:18px;transition:transform 0.3s}
+.contact-link:hover .cl-arrow{transform:translateX(4px)}
+
+footer{padding:40px 8%;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
+.footer-name{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--muted);font-style:italic}
+.footer-copy{font-size:11px;color:var(--muted);letter-spacing:0.06em}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:0.1s}.reveal-d2{transition-delay:0.2s}.reveal-d3{transition-delay:0.3s}
+
+@media(max-width:1000px){
+  #hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-stats{right:0}
+  .about-grid,.skills-intro,.contact-layout{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-card{grid-template-columns:1fr}
+  .proj-card-right{height:200px}
+  .hobbies-grid{grid-template-columns:1fr}
+  .soft-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:650px){
+  nav .nav-links{display:none}
+  section{padding:70px 5%}
+  .skills-grid{grid-template-columns:1fr}
+}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:9999;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:4px;box-shadow:0 0 80px rgba(0,0,0,0.9)}
+.lightbox-close{position:absolute;top:18px;right:24px;color:var(--gold);font-size:28px;cursor:pointer;background:none;border:none;line-height:1;z-index:1}
+
+/* CERT IMAGES */
+.cert-imgs-row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.cert-img{width:90px;height:64px;object-fit:cover;border-radius:3px;cursor:zoom-in;border:1px solid var(--border);transition:all 0.3s;filter:brightness(0.8)}
+.cert-img:hover{transform:scale(1.1);filter:brightness(1.1);border-color:var(--gold);box-shadow:0 0 12px var(--glow)}
+.exp-cert{margin-top:12px}
+.exp-cert .cert-img{width:110px;height:76px}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">M · E · A</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#hobbies">Life</a></li>
+    <li><a href="#certificates">Certificates</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>Data Analyst · Alexandria, Egypt</span>
+    </div>
+    <h1 class="hero-name">Mohamed<br><strong>Ezzat Anwar</strong></h1>
+    <p class="hero-title">Turning raw data into real decisions</p>
+    <p class="hero-bio">Sociology graduate with a growing passion for technology and data. I build dashboards, clean datasets, and tell stories with numbers — using Python, Excel, Power BI, and Tableau.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-gold">View Projects</a>
+      <a href="#contact" class="btn-outline">💼 Hire Me</a>
+      <button class="btn-outline" id="cv-btn">↓ Download CV</button>
+      <a href="https://github.com/mhmdezzat24" target="_blank" class="btn-outline">GitHub Profile</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-img-wrap">
+      <img src="https://i.ibb.co/GQxwDDbB/Whats-App-Image.jpg" alt="Mohamed Ezzat Anwar" />
+      <div class="hero-img-overlay"></div>
+      <div class="hero-img-overlay2"></div>
+    </div>
+    <div class="hero-photo-label">
+      <div class="name">Mohamed Ezzat Anwar</div>
+      <div class="loc">Alexandria · Egypt</div>
+    </div>
+  </div>
+
+  <div class="hero-deco"></div>
+  <div class="hero-deco2"></div>
+
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-label">Projects</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label">Internships</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">5+</div><div class="hero-stat-label">Tools</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">100K+</div><div class="hero-stat-label">Rows Analyzed</div></div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-tag reveal"><div class="sec-tag-line"></div><span>01 — About</span></div>
+  <h2 class="sec-title reveal">Who I <em>Am</em></h2>
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="about-text">
+        <p>I'm <strong>Mohamed Ezzat Anwar</strong>, a data analyst from Alexandria, Egypt. My academic background in Sociology gave me a deep understanding of human systems — which I now apply to data systems.</p>
+        <p>After completing structured courses in <strong>C++ programming</strong> and <strong>Data Analysis</strong>, I gained real hands-on experience working with datasets ranging from 5,000 to 100,000+ rows across Python, Excel, Power BI, and Tableau.</p>
+        <p>I've also completed <strong>3 internships at Ezz El-Dekheila Steel</strong> — one of Egypt's largest industrial companies — in both Human Resources and Purchasing departments.</p>
+      </div>
+      <div class="about-info">
+        <div class="ai-row"><span class="ai-label">Phone</span><span class="ai-val">01556278692</span></div>
+        <div class="ai-row"><span class="ai-label">Email</span><span class="ai-val"><a href="mailto:mhmdezzat24@gmail.com">mhmdezzat24@gmail.com</a></span></div>
+        <div class="ai-row"><span class="ai-label">Location</span><span class="ai-val">Alexandria, Egypt</span></div>
+        <div class="ai-row"><span class="ai-label">Born</span><span class="ai-val">20 July 2003</span></div>
+        <div class="ai-row"><span class="ai-label">Languages</span><span class="ai-val">Arabic (Native) · English (Intermediate)</span></div>
+      </div>
+    </div>
+    <div class="reveal reveal-d2">
+      <div class="about-stat" style="margin-bottom:1px"><div class="about-stat-num">5</div><div class="about-stat-label">Real Projects Completed</div></div>
+      <div class="about-stat" style="margin-bottom:1px"><div class="about-stat-num">3</div><div class="about-stat-label">Internships at Ezz Steel</div></div>
+      <div class="about-stat" style="margin-bottom:1px"><div class="about-stat-num">100K+</div><div class="about-stat-label">Rows of Data Analyzed</div></div>
+      <div class="about-stat" style="margin-bottom:16px"><div class="about-stat-num">5+</div><div class="about-stat-label">Tools Mastered</div></div>
+      <button class="cv-download" id="cv-btn2">↓ Download My CV (PDF)</button>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-tag reveal"><div class="sec-tag-line"></div><span>02 — Experience</span></div>
+  <h2 class="sec-title reveal">My <em>Journey</em></h2>
+  <div class="exp-list">
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-company">Ezz El-Dekheila Steel</div>
+        <div class="exp-role">Purchasing Department — Internship</div>
+        <p class="exp-desc">Assisted in preparing purchase orders and communicating with suppliers for quotations and pricing. Compared suppliers based on price and quality, monitored inventory levels, tracked orders and delivery schedules, maintained purchasing records, and supported cost analysis and supplier evaluation.</p>
+        <div style="margin-top:12px"><img src="https://i.ibb.co/YzTWz0X/ezdkh.jpg" alt="Certificate" style="width:100px;height:70px;object-fit:cover;border-radius:3px;cursor:zoom-in;border:1px solid var(--border);filter:brightness(0.8);transition:all 0.3s" onmouseover="this.style.filter='brightness(1.1)';this.style.transform='scale(1.05)'" onmouseout="this.style.filter='brightness(0.8)';this.style.transform=''" onclick="openImg(this.src)"></div>
+      </div>
+      <div class="exp-date">Summer 2024</div>
+    </div>
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-company">Ezz El-Dekheila Steel</div>
+        <div class="exp-role">Human Resources — Medical Benefits Intern</div>
+        <p class="exp-desc">Supported employee medical benefits administration, healthcare package management, and annual coverage plans including treatment, surgeries, and radiology. Worked with company clinic for medical approvals, registered services via barcode system, coordinated employee trips, and handled internal HR inquiries.</p>
+        <div style="margin-top:12px"><img src="https://i.ibb.co/zTsHmMTg/ezdkh2.jpg" alt="Certificate" style="width:100px;height:70px;object-fit:cover;border-radius:3px;cursor:zoom-in;border:1px solid var(--border);filter:brightness(0.8);transition:all 0.3s" onmouseover="this.style.filter='brightness(1.1)';this.style.transform='scale(1.05)'" onmouseout="this.style.filter='brightness(0.8)';this.style.transform=''" onclick="openImg(this.src)"></div>
+      </div>
+      <div class="exp-date">Summer 2023</div>
+    </div>
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-company">Ezz El-Dekheila Steel</div>
+        <div class="exp-role">Human Resources — Personnel Affairs Intern</div>
+        <p class="exp-desc">Managed employee files and official documentation, supported attendance tracking and leave management, coordinated hotel bookings and transportation for employees. Assisted the Recruitment team in CV screening and interview scheduling, and the Training Department in preparing attendance sheets and documentation.</p>
+        <div style="margin-top:12px"><img src="https://i.ibb.co/0RfcsMVg/ezdhk2.jpg" alt="Certificate" style="width:100px;height:70px;object-fit:cover;border-radius:3px;cursor:zoom-in;border:1px solid var(--border);filter:brightness(0.8);transition:all 0.3s" onmouseover="this.style.filter='brightness(1.1)';this.style.transform='scale(1.05)'" onmouseout="this.style.filter='brightness(0.8)';this.style.transform=''" onclick="openImg(this.src)"></div>
+      </div>
+      <div class="exp-date">Summer 2022</div>
+    </div>
+    <div class="exp-item exp-edu reveal">
+      <div>
+        <div class="exp-company">Alexandria University — Faculty of Arts</div>
+        <div class="exp-role">Bachelor's Degree · Sociology Department</div>
+        <p class="exp-desc">Studied social systems, research methodology, and statistical analysis. Built an analytical mindset now applied to data science.</p>
+        <span class="edu-badge">GPA 2.26 · 2021 – 2025</span>
+      </div>
+      <div class="exp-date">2021–2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-tag reveal"><div class="sec-tag-line"></div><span>03 — Skills</span></div>
+  <h2 class="sec-title reveal">What I <em>Do</em></h2>
+  <div class="skills-block-title reveal">Technical Skills</div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon-wrap">🐍</div>
+      <div class="skill-name">Python & Analysis</div>
+      <p class="skill-desc">EDA, data cleaning, missing value imputation (mean/median/mode), duplicate removal, and Matplotlib visualizations on real datasets.</p>
+      <div class="skill-tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">Statistics</span></div>
+    </div>
+    <div class="skill-card reveal reveal-d1">
+      <div class="skill-icon-wrap">📊</div>
+      <div class="skill-name">Power BI</div>
+      <p class="skill-desc">Multi-page dashboards with KPI cards, decomposition trees, bar/pie/funnel charts, gauges, filled maps, and DAX measures.</p>
+      <div class="skill-tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Data Modeling</span><span class="tag">Maps</span></div>
+    </div>
+    <div class="skill-card reveal reveal-d2">
+      <div class="skill-icon-wrap">📈</div>
+      <div class="skill-name">Tableau</div>
+      <p class="skill-desc">Interactive dashboards with geographic maps, segment charts, and breakdowns by branch, category, product, and month.</p>
+      <div class="skill-tags"><span class="tag">Tableau</span><span class="tag">Maps</span><span class="tag">Filters</span><span class="tag">Dashboards</span></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon-wrap">📋</div>
+      <div class="skill-name">Excel & MOS</div>
+      <p class="skill-desc">Advanced data cleaning, 10+ pivot tables, and interactive Excel dashboards. Microsoft Office Specialist certified.</p>
+      <div class="skill-tags"><span class="tag">Excel</span><span class="tag">Pivot Tables</span><span class="tag">MOS</span><span class="tag">Dashboards</span></div>
+    </div>
+    <div class="skill-card reveal reveal-d1">
+      <div class="skill-icon-wrap">🗄️</div>
+      <div class="skill-name">SQL & Database</div>
+      <p class="skill-desc">Designing relational databases and writing queries to extract, filter, and aggregate structured data efficiently.</p>
+      <div class="skill-tags"><span class="tag">SQL</span><span class="tag">Database Design</span><span class="tag">Queries</span></div>
+    </div>
+    <div class="skill-card reveal reveal-d2">
+      <div class="skill-icon-wrap">⚙️</div>
+      <div class="skill-name">C++ & Problem Solving</div>
+      <p class="skill-desc">OOP, data structures, and algorithmic thinking — the logical backbone behind all analytical work.</p>
+      <div class="skill-tags"><span class="tag">C++</span><span class="tag">OOP</span><span class="tag">Data Structures</span></div>
+    </div>
+  </div>
+
+  <div class="skills-block-title reveal">Soft Skills</div>
+  <div class="soft-grid">
+    <div class="soft-item reveal"><span class="soft-dot"></span>Team Work</div>
+    <div class="soft-item reveal reveal-d1"><span class="soft-dot"></span>Communication</div>
+    <div class="soft-item reveal reveal-d2"><span class="soft-dot"></span>Public Speaking</div>
+    <div class="soft-item reveal reveal-d3"><span class="soft-dot"></span>Time Management</div>
+  </div>
+
+  <div class="lang-grid">
+    <div class="lang-item reveal">
+      <div class="lang-name">Arabic</div>
+      <div class="lang-level">Mother Tongue</div>
+      <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+    </div>
+    <div class="lang-item reveal reveal-d1">
+      <div class="lang-name">English</div>
+      <div class="lang-level">Intermediate</div>
+      <div class="lang-bar"><div class="lang-fill" style="width:55%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-tag reveal"><div class="sec-tag-line"></div><span>04 — Projects</span></div>
+  <h2 class="sec-title reveal">My <em>Work</em></h2>
+  <p style="font-size:12px;color:var(--muted);letter-spacing:0.06em;margin-bottom:24px;opacity:0.7" class="reveal">Click any project to expand details ↓</p>
+  <div class="proj-grid">
+
+    <div class="proj-card reveal">
+      <div class="proj-card-left">
+        <div>
+          <div class="proj-meta"><span class="proj-num">01</span><span class="proj-badge b-xl">Excel</span></div>
+          <div class="proj-title">Superstore Sales Analysis & Dashboard</div>
+          <p class="proj-desc">Analyzed sales data to identify top-performing categories and trends — simulating real business decisions and turning 3,959 raw orders into a full interactive dashboard with actionable revenue insights.</p>
+          <div class="proj-details">
+            <div class="proj-details-inner">
+              <div class="proj-detail"><span class="proj-arrow">→</span>3,959 orders (2015–2018), 18 columns: Order ID, Region, Category, Sales</div>
+              <div class="proj-detail"><span class="proj-arrow">→</span>Date cleaning: added "Order Date Clean" for accurate time-series</div>
+              <div class="proj-detail"><span class="proj-arrow">→</span>10+ pivot tables: by year, region, category, segment, ship mode, state</div>
+              <div class="proj-detail"><span class="proj-arrow">→</span>Technology 38.3% · Furniture 32.7% · Office Supplies 29% of sales</div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-tags" style="margin-top:16px"><span class="tag">Excel</span><span class="tag">Pivot Tables</span><span class="tag">Data Cleaning</span><span class="tag">Dashboard</span></div>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+          <a href="https://github.com/mhmdezzat24/superstore-sales-analysis" target="_blank" class="btn-outline" style="font-size:10px;padding:8px 16px" onclick="event.stopPropagation()">View on GitHub</a>
+        </div>
+      </div>
+      <div class="proj-card-right">
+        <div class="proj-mockup" style="padding:24px;flex-direction:column;gap:12px">
+          <div class="mock-title">Sales Overview · 2015–2018</div>
+          <div class="mock-kpis">
+            <div class="mock-kpi"><div class="mock-kpi-num">$2.3M</div><div class="mock-kpi-label">Total Sales</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num">3,959</div><div class="mock-kpi-label">Orders</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num">49</div><div class="mock-kpi-label">States</div></div>
+          </div>
+          <div class="mock-bar-row" style="height:100px">
+            <div class="mock-bar" style="width:18%;height:55%;background:rgba(201,169,110,0.4)"></div>
+            <div class="mock-bar" style="width:18%;height:62%;background:rgba(201,169,110,0.55)"></div>
+            <div class="mock-bar" style="width:18%;height:75%;background:rgba(201,169,110,0.7)"></div>
+            <div class="mock-bar" style="width:18%;height:100%;background:var(--gold)"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--muted)"><span>2015</span><span>2016</span><span>2017</span><span>2018</span></div>
+        </div>
+      </div>
+      <span class="proj-expand">+</span>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-card-left">
+        <div>
+          <div class="proj-meta"><span class="proj-num">02</span><span class="proj-badge b-pbi">Power BI</span></div>
+          <div class="proj-title">Pakistan E-Commerce Sales Insights</div>
+          <p class="proj-desc">Analyzed Pakistan's largest e-commerce dataset (100MB+) to surface revenue trends, category performance, and payment insights — simulating real decisions for e-commerce growth strategy.</p>
+          <div class="proj-details">
+            <div class="proj-details-inner">
+              <div class="proj-detail"><span class="proj-arrow">→</span>Columns: price, qty_ordered, grand_total, category, payment_method, FY</div>
+              <div class="proj-detail"><span class="proj-arrow">→</span>Completion vs. cancellation rates across fiscal years FY17+</div>
+              <div class="proj-detail"><span class="proj-arrow">→</span>Revenue by category (Women's Fashion, Beauty) and payment type (COD vs. online)</div>
+              <div class="proj-detail"><span class="proj-arrow">→</span>KPI cards, bar charts, and category breakdowns for executive reporting</div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-tags" style="margin-top:16px"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">E-Commerce</span><span class="tag">Segmentation</span></div>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+          <a href="https://github.com/mhmdezzat24/ecommerce-pakistan-powerbi" target="_blank" class="btn-outline" style="font-size:10px;padding:8px 16px" onclick="event.stopPropagation()">View on GitHub</a>
+        </div>
+      </div>
+      <div class="proj-card-right">
+        <div class="proj-mockup" style="flex-direction:column;gap:16px;padding:24px">
+          <div class="mock-title">E-Commerce Dashboard</div>
+          <div class="mock-kpis">
+            <div class="mock-kpi"><div class="mock-kpi-num">524K</div><div class="mock-kpi-label">Orders</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num">68%</div><div class="mock-kpi-label">Completed</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num">COD</div><div class="mock-kpi-label">Top Method</div></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center">
+            <div class="mock-pie"></div>
+            <div style="display:flex;flex-direction:column;gap:4px;font-size:9px;color:var(--muted)">
+              <span style="color:var(--gold)">● Women's Fashion 34%</span>
+              <span style="color:#4ade80">● Electronics 29%</span>
+              <span style="color:#60a5fa">● Beauty 17%</span>
+              <span style="color:#a78bfa">● Other 20%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="proj-expand">+</span>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-card-left">
+        <div>
+          <div class="proj-meta"><span class="proj-num">03</span><span class="proj-badge b-pbi">Power BI</span></div>
+          <div class="proj-title">Walmart Sales Dashboard — 4 Pages</div>
+          <p class="proj-desc">Built a 4-page Power BI dashboard for Walmart retail analytics — tracking KPIs, comparing branch performance, and monitoring sales vs. target to support data-driven retail decisions.</p>
+          <div class="proj-details">
+            <div class="proj-details-inner">
+              <div class="proj-detail"><span class="proj-arrow">→</span>Page 1 — Decomposition tree by Month, Segment, Branch, Category</div>
+              <div class="proj-detail"><span class="proj-arrow">→</span>Page 2 — KPIs (Total/Max/Min/Avg) + column chart + pie + top customers</div>
+              <div class="proj-detail"><span class="proj-arrow">→</span>Page 3 — Funnel by Branch + gauge for Sales vs. Target</div>
+              <div class="proj-detail"><span class="proj-arrow">→</span>Page 4 — Filled geographic map across all branches</div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-tags" style="margin-top:16px"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Maps</span><span class="tag">KPIs</span></div>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+          <a href="https://github.com/mhmdezzat24/walmart-dashboard-powerbi" target="_blank" class="btn-outline" style="font-size:10px;padding:8px 16px" onclick="event.stopPropagation()">View on GitHub</a>
+        </div>
+      </div>
+      <div class="proj-card-right">
+        <div class="proj-mockup" style="flex-direction:column;gap:12px;padding:24px">
+          <div class="mock-title">Walmart · Branch Performance</div>
+          <div class="mock-funnel">
+            <div class="mock-funnel-step" style="width:100%"></div>
+            <div class="mock-funnel-step" style="width:82%;opacity:0.8"></div>
+            <div class="mock-funnel-step" style="width:65%;opacity:0.65"></div>
+            <div class="mock-funnel-step" style="width:48%;opacity:0.5"></div>
+          </div>
+          <div style="display:flex;gap:6px;justify-content:center;font-size:9px;color:var(--muted)">
+            <span>Branch A</span><span>Branch B</span><span>Branch C</span><span>Branch D</span>
+          </div>
+          <div class="mock-kpis" style="margin-top:4px">
+            <div class="mock-kpi"><div class="mock-kpi-num">$1.2M</div><div class="mock-kpi-label">Total</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num">87%</div><div class="mock-kpi-label">vs Target</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num">3</div><div class="mock-kpi-label">Segments</div></div>
+          </div>
+        </div>
+      </div>
+      <span class="proj-expand">+</span>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-card-left">
+        <div>
+          <div class="proj-meta"><span class="proj-num">04</span><span class="proj-badge b-tab">Tableau</span></div>
+          <div class="proj-title">Sales Performance Dashboard — Tableau</div>
+          <p class="proj-desc">Analyzed sales data across branches, categories, and segments using Tableau — delivering a geographic map view and unified executive dashboard to identify growth opportunities.</p>
+          <div class="proj-details">
+            <div class="proj-details-inner">
+              <div class="proj-detail"><span class="proj-arrow">→</span>6 sheets: Client Segment, Map, Sales by Product, Branch, Category, Month</div>
+              <div class="proj-detail"><span class="proj-arrow">→</span>Metrics: Total Sales, Total Cost, Profit across all branches</div>
+              <div class="proj-detail"><span class="proj-arrow">→</span>Interactive geographic map for regional branch performance</div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-tags" style="margin-top:16px"><span class="tag">Tableau</span><span class="tag">Maps</span><span class="tag">Sales Analysis</span></div>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+          <a href="https://github.com/mhmdezzat24/sales-dashboard-tableau" target="_blank" class="btn-outline" style="font-size:10px;padding:8px 16px" onclick="event.stopPropagation()">View on GitHub</a>
+        </div>
+      </div>
+      <div class="proj-card-right">
+        <div class="proj-mockup" style="padding:24px;flex-direction:column;gap:12px">
+          <div class="mock-title">Sales Dashboard · Geographic View</div>
+          <div class="mock-map" style="height:120px;position:relative">
+            <div class="mock-dot" style="top:40%;left:60%"></div>
+            <div class="mock-dot" style="top:55%;left:35%;width:12px;height:12px"></div>
+            <div class="mock-dot" style="top:30%;left:72%"></div>
+            <div class="mock-dot" style="top:65%;left:50%"></div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span style="font-size:9px;color:var(--gold)">● Branch A: $342K</span>
+            <span style="font-size:9px;color:var(--muted)">● Branch B: $281K</span>
+            <span style="font-size:9px;color:var(--muted)">● Branch C: $198K</span>
+          </div>
+        </div>
+      </div>
+      <span class="proj-expand">+</span>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-card-left">
+        <div>
+          <div class="proj-meta"><span class="proj-num">05</span><span class="proj-badge b-py">Python</span></div>
+          <div class="proj-title">Student Grading Dataset — EDA & Cleaning</div>
+          <p class="proj-desc">Analyzed sales data to identify patterns in student performance — cleaning a 5,000-row academic dataset, handling missing values strategically, and visualizing key distributions to surface educational insights.</p>
+          <div class="proj-details">
+            <div class="proj-details-inner">
+              <div class="proj-detail"><span class="proj-arrow">→</span>5,000 rows × 23 cols: Gender, Department, Assignments_Avg, Attendance %</div>
+              <div class="proj-detail"><span class="proj-arrow">→</span>Assignments_Avg → mean · Attendance → median · Education → mode</div>
+              <div class="proj-detail"><span class="proj-arrow">→</span>Demonstrated outlier impact: salaries mean=24,120 vs median=5,200</div>
+              <div class="proj-detail"><span class="proj-arrow">→</span>Exported clean CSV; visualized Gender & Department distributions</div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-tags" style="margin-top:16px"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">EDA</span></div>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+          <a href="https://github.com/mhmdezzat24/student-grading-eda" target="_blank" class="btn-outline" style="font-size:10px;padding:8px 16px" onclick="event.stopPropagation()">View on GitHub</a>
+        </div>
+      </div>
+      <div class="proj-card-right">
+        <div class="proj-mockup" style="padding:24px;flex-direction:column;gap:12px">
+          <div class="mock-title">Student Dataset · Gender Distribution</div>
+          <div class="mock-bar-row" style="height:100px;justify-content:center;gap:20px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div class="mock-bar" style="width:60px;height:78%;background:rgba(96,165,250,0.6)"></div>
+              <span style="font-size:9px;color:var(--muted)">Male</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div class="mock-bar" style="width:60px;height:100%;background:rgba(201,169,110,0.7)"></div>
+              <span style="font-size:9px;color:var(--muted)">Female</span>
+            </div>
+          </div>
+          <div class="mock-kpis">
+            <div class="mock-kpi"><div class="mock-kpi-num">5K</div><div class="mock-kpi-label">Students</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num">23</div><div class="mock-kpi-label">Features</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num">0</div><div class="mock-kpi-label">Nulls left</div></div>
+          </div>
+        </div>
+      </div>
+      <span class="proj-expand">+</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOBBIES -->
+<section id="hobbies">
+  <div class="sec-tag reveal"><div class="sec-tag-line"></div><span>05 — Life Beyond Data</span></div>
+  <h2 class="sec-title reveal">What Drives <em>Me</em></h2>
+  <div class="hobbies-grid">
+
+    <div class="hobby-card reveal">
+      <span class="hobby-icon">📚</span>
+      <div class="hobby-title">Reading</div>
+      <p class="hobby-text">Books aren't just a hobby — they're how I understand the world. I read across a wide range of genres: from psychology and philosophy to biographies, self-development, and history. I'm drawn to books that challenge how I think, whether it's about human behavior, success, resilience, or the nature of life itself. Every book leaves a mark on the way I see things and approach problems.</p>
+      <span class="hobby-highlight">Across all genres — psychology · philosophy · self-development · life</span>
+    </div>
+
+    <div class="hobby-card reveal reveal-d1">
+      <span class="hobby-icon">✈️</span>
+      <div class="hobby-title">Travelling</div>
+      <p class="hobby-text">Every place has a story, and I love being part of it. Travelling sharpens my curiosity and gives me perspective I can't find anywhere else — from exploring the history of a city to experiencing a completely different culture and way of life. Whether it's a short trip or a longer journey, I believe that leaving your comfort zone and seeing the world is one of the best investments you can make in yourself.</p>
+      <span class="hobby-highlight">Every trip is a lesson — culture · history · perspective · people</span>
+    </div>
+
+    <div class="hobby-card reveal reveal-d2">
+      <span class="hobby-icon">⚽</span>
+      <div class="hobby-title">Sports</div>
+      <p class="hobby-text">Sport has been a major part of my life since childhood. I've played football for years and have a genuine passion for the game — the strategy, the teamwork, and the drive to push past your limits. Beyond football, I trained seriously in <strong style="color:var(--gold)">Taekwondo</strong> — competing in tournaments, earning achievements, and eventually becoming a <strong style="color:var(--gold)">certified coach</strong>. Training others taught me patience, discipline, and the power of breaking things down into learnable steps — skills that directly shape how I approach data analysis today.</p>
+      <span class="hobby-highlight">Football · Taekwondo champion · Certified Taekwondo coach</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates" style="background:var(--bg2);padding:100px 8%">
+  <div class="sec-tag reveal"><div class="sec-tag-line"></div><span>06 — Certificates</span></div>
+  <h2 class="sec-title reveal">My <em>Certificates</em></h2>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px" class="reveal">
+    <div style="background:var(--bg3);padding:36px 40px;border-left:2px solid var(--gold);transition:background 0.3s" onmouseover="this.style.background='rgba(232,192,120,0.05)'" onmouseout="this.style.background='var(--bg3)'">
+      <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Microsoft · MOS</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white);margin-bottom:10px">Microsoft Office Specialist (MOS)</h3>
+      <p style="font-size:13px;color:var(--muted);line-height:1.75;font-weight:300">Certified in Excel and Microsoft Office — advanced spreadsheet skills, data analysis, pivot tables, and dashboard creation.</p>
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+        <img src="https://i.ibb.co/fYhfPpN0/microsoft.jpg" alt="MOS 1" style="width:88px;height:62px;object-fit:cover;border-radius:3px;cursor:zoom-in;border:1px solid rgba(232,192,120,0.2);filter:brightness(0.8);transition:all 0.3s" onmouseover="this.style.filter='brightness(1.1)';this.style.transform='scale(1.08)';this.style.borderColor='var(--gold)'" onmouseout="this.style.filter='brightness(0.8)';this.style.transform='';this.style.borderColor='rgba(232,192,120,0.2)'" onclick="openImg(this.src)">
+        <img src="https://i.ibb.co/Kz79BgHP/microsoft2.jpg" alt="MOS 2" style="width:88px;height:62px;object-fit:cover;border-radius:3px;cursor:zoom-in;border:1px solid rgba(232,192,120,0.2);filter:brightness(0.8);transition:all 0.3s" onmouseover="this.style.filter='brightness(1.1)';this.style.transform='scale(1.08)';this.style.borderColor='var(--gold)'" onmouseout="this.style.filter='brightness(0.8)';this.style.transform='';this.style.borderColor='rgba(232,192,120,0.2)'" onclick="openImg(this.src)">
+        <img src="https://i.ibb.co/yFtdfFHh/microsoft3.jpg" alt="MOS 3" style="width:88px;height:62px;object-fit:cover;border-radius:3px;cursor:zoom-in;border:1px solid rgba(232,192,120,0.2);filter:brightness(0.8);transition:all 0.3s" onmouseover="this.style.filter='brightness(1.1)';this.style.transform='scale(1.08)';this.style.borderColor='var(--gold)'" onmouseout="this.style.filter='brightness(0.8)';this.style.transform='';this.style.borderColor='rgba(232,192,120,0.2)'" onclick="openImg(this.src)">
+      </div>
+    </div>
+    <div style="background:var(--bg3);padding:36px 40px;border-left:2px solid var(--gold);transition:background 0.3s" onmouseover="this.style.background='rgba(232,192,120,0.05)'" onmouseout="this.style.background='var(--bg3)'">
+      <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Data Analytics · 2024</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white);margin-bottom:10px">Data Analysis Certificate</h3>
+      <p style="font-size:13px;color:var(--muted);line-height:1.75;font-weight:300">Structured program covering statistics, Python, Power BI, Tableau, SQL, and Excel — with hands-on real-world projects.</p>
+      <div style="display:flex;gap:8px;margin-top:14px">
+        <img src="https://i.ibb.co/KjHfGDzC/Data-Analysis.jpg" alt="Data Analysis" style="width:88px;height:62px;object-fit:cover;border-radius:3px;cursor:zoom-in;border:1px solid rgba(232,192,120,0.2);filter:brightness(0.8);transition:all 0.3s" onmouseover="this.style.filter='brightness(1.1)';this.style.transform='scale(1.08)';this.style.borderColor='var(--gold)'" onmouseout="this.style.filter='brightness(0.8)';this.style.transform='';this.style.borderColor='rgba(232,192,120,0.2)'" onclick="openImg(this.src)">
+      </div>
+    </div>
+    <div style="background:var(--bg3);padding:36px 40px;border-left:2px solid var(--gold);transition:background 0.3s" onmouseover="this.style.background='rgba(232,192,120,0.05)'" onmouseout="this.style.background='var(--bg3)'">
+      <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Language · English</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white);margin-bottom:10px">English Language Course</h3>
+      <p style="font-size:13px;color:var(--muted);line-height:1.75;font-weight:300">Completed a structured English language course — developing professional communication skills for business and technical environments.</p>
+      <div style="display:flex;gap:8px;margin-top:14px">
+        <img src="https://i.ibb.co/Kj8KHzxS/english.jpg" alt="English" style="width:88px;height:62px;object-fit:cover;border-radius:3px;cursor:zoom-in;border:1px solid rgba(232,192,120,0.2);filter:brightness(0.8);transition:all 0.3s" onmouseover="this.style.filter='brightness(1.1)';this.style.transform='scale(1.08)';this.style.borderColor='var(--gold)'" onmouseout="this.style.filter='brightness(0.8)';this.style.transform='';this.style.borderColor='rgba(232,192,120,0.2)'" onclick="openImg(this.src)">
+      </div>
+    </div>
+    <div style="background:var(--bg3);padding:36px 40px;border-left:2px solid var(--gold);transition:background 0.3s" onmouseover="this.style.background='rgba(232,192,120,0.05)'" onmouseout="this.style.background='var(--bg3)'">
+      <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Programming · C++</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white);margin-bottom:10px">C++ Programming</h3>
+      <p style="font-size:13px;color:var(--muted);line-height:1.75;font-weight:300">Completed a full structured course covering OOP, data structures, and algorithmic problem solving — building the logical foundation for data analysis work.</p>
+      <div style="display:flex;gap:8px;margin-top:14px">
+        <img src="https://i.ibb.co/ZQ2nQN8/c.jpg" alt="C++ Certificate" style="width:88px;height:62px;object-fit:cover;border-radius:3px;cursor:zoom-in;border:1px solid rgba(232,192,120,0.2);filter:brightness(0.8);transition:all 0.3s" onmouseover="this.style.filter='brightness(1.1)';this.style.transform='scale(1.08)';this.style.borderColor='var(--gold)'" onmouseout="this.style.filter='brightness(0.8)';this.style.transform='';this.style.borderColor='rgba(232,192,120,0.2)'" onclick="openImg(this.src)">
+      </div>
+    </div>
+    <div style="background:var(--bg3);padding:36px 40px;border-left:2px solid var(--gold);transition:background 0.3s" onmouseover="this.style.background='rgba(232,192,120,0.05)'" onmouseout="this.style.background='var(--bg3)'">
+      <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Martial Arts · Coach</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white);margin-bottom:10px">Certified Taekwondo Coach</h3>
+      <p style="font-size:13px;color:var(--muted);line-height:1.75;font-weight:300">Certified coach with competitive tournament achievements — demonstrating discipline, leadership, and the ability to train and mentor others effectively.</p>
+      <div style="display:flex;gap:8px;margin-top:14px">
+        <img src="https://i.ibb.co/rGVhbDLP/Taekwndo-coach.jpg" alt="Taekwondo Coach" style="width:88px;height:62px;object-fit:cover;border-radius:3px;cursor:zoom-in;border:1px solid rgba(232,192,120,0.2);filter:brightness(0.8);transition:all 0.3s" onmouseover="this.style.filter='brightness(1.1)';this.style.transform='scale(1.08)';this.style.borderColor='var(--gold)'" onmouseout="this.style.filter='brightness(0.8)';this.style.transform='';this.style.borderColor='rgba(232,192,120,0.2)'" onclick="openImg(this.src)">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-tag reveal"><div class="sec-tag-line"></div><span>07 — Contact</span></div>
+  <div class="contact-layout">
+    <div class="reveal">
+      <h2 class="contact-lead">Ready to<br><em>Hire Me?</em></h2>
+      <p class="contact-subtext">I'm currently available for data analyst roles, freelance projects, and internships. If you're looking for someone who turns messy data into clear decisions — let's talk.</p>
+      <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
+        <a href="mailto:mhmdezzat24@gmail.com" class="btn-gold">💼 Hire Me</a>
+        <button class="btn-outline" id="cv-btn3" style="cursor:pointer">↓ Download CV</button>
+      </div>
+    </div>
+    <div class="contact-links reveal reveal-d2">
+      <a href="mailto:mhmdezzat24@gmail.com" class="contact-link">
+        <div><div class="cl-label">Email</div><div class="cl-value">mhmdezzat24@gmail.com</div></div>
+        <span class="cl-arrow">→</span>
+      </a>
+      <a href="https://www.linkedin.com/in/mohamedezzat222/" target="_blank" class="contact-link">
+        <div><div class="cl-label">LinkedIn</div><div class="cl-value">linkedin.com/in/mohamedezzat222</div></div>
+        <span class="cl-arrow">→</span>
+      </a>
+      <a href="https://github.com/mhmdezzat24" target="_blank" class="contact-link">
+        <div><div class="cl-label">GitHub</div><div class="cl-value">github.com/mhmdezzat24</div></div>
+        <span class="cl-arrow">→</span>
+      </a>
+      <a href="tel:01556278692" class="contact-link">
+        <div><div class="cl-label">Phone</div><div class="cl-value">01556278692</div></div>
+        <span class="cl-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div id="lightbox" onclick="this.classList.remove('open')" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:9999;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;flex-direction:column">
+  <button onclick="event.stopPropagation();document.getElementById('lightbox').classList.remove('open')" style="position:absolute;top:18px;right:24px;color:#e8c078;font-size:28px;cursor:pointer;background:none;border:none;line-height:1">✕</button>
+  <img id="lightbox-img" src="" alt="" style="max-width:90vw;max-height:88vh;object-fit:contain;border-radius:4px;box-shadow:0 0 80px rgba(0,0,0,0.9)">
+</div>
+<style>
+#lightbox.open { display:flex !important; }
+</style>
+
+<footer>
+  <span class="footer-name">Mohamed Ezzat Anwar</span>
+  <span class="footer-copy">2025 — Data Analyst · Alexandria, Egypt</span>
+</footer>
+
+<script>
+
+// Lightbox
+function openImg(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') document.getElementById('lightbox').classList.remove('open'); });
+
+// CV - file link
+function downloadCV() {
+  const a = document.createElement('a');
+  a.href = 'Mohamed_Ezzat_CV.pdf';
+  a.download = 'Mohamed_Ezzat_Anwar_CV.pdf';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+
+document.getElementById('cv-btn').addEventListener('click', downloadCV);
+document.getElementById('cv-btn2').addEventListener('click', downloadCV);
+document.getElementById('cv-btn3').addEventListener('click', downloadCV);
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Projects expand
+document.querySelectorAll('.proj-card').forEach(card => {
+  card.addEventListener('click', () => card.classList.toggle('open'));
+});
+
+// Nav active
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section[id]');
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+  });
+});
+</script>
+
+<div class="lightbox" id="lightbox" onclick="document.getElementById('lightbox').classList.remove('open')">
+  <button class="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('open')">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+</body>
+</html>
